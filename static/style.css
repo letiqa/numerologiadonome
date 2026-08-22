@@ -1,0 +1,533 @@
+/* interface visual feita com uso de IA */
+
+
+@font-face {
+    font-family: 'Transcity';
+    src: url('Transcity DEMO.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --bg-base: #0a0612;
+    --card-bg: rgba(255, 255, 255, 0.04);
+    --card-border: rgba(192, 192, 200, 0.4);
+    --text-primary: #f3f4f6;
+    --text-secondary: #b8b9c5;
+    --aura-purple: rgba(139, 92, 246, 0.35);
+    --aura-violet: rgba(167, 139, 250, 0.25);
+    --number-glow: rgba(192, 202, 245, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    background: var(--bg-base);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Aura roxa de fundo — três orbes flutuantes */
+body::before,
+body::after,
+.aura-extra {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: -1;
+}
+
+body::before {
+    width: 400px;
+    height: 400px;
+    background: var(--aura-purple);
+    top: 10%;
+    left: 15%;
+    animation: float-slow 15s infinite alternate ease-in-out;
+}
+
+body::after {
+    width: 350px;
+    height: 350px;
+    background: var(--aura-violet);
+    bottom: 10%;
+    right: 15%;
+    animation: float-slow 20s infinite alternate-reverse ease-in-out;
+}
+
+.aura-extra {
+    width: 300px;
+    height: 300px;
+    background: rgba(124, 58, 237, 0.2);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: float-slow 18s infinite alternate ease-in-out;
+}
+
+@keyframes float-slow {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(40px, 50px) scale(1.15);
+    }
+}
+
+/* Box central com transparência leve e borda prateada */
+.container-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+
+.container {
+    width: 100%;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 0 60px rgba(139, 92, 246, 0.12);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.container:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 22px 45px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 0 70px rgba(139, 92, 246, 0.18);
+}
+
+/* Estrelas flutuantes atrás do container */
+.star {
+    position: absolute;
+    user-select: none;
+    pointer-events: none;
+    z-index: 1;
+    font-weight: normal;
+    line-height: 1;
+}
+
+.star-1 {
+    font-size: 2.2rem;
+    color: rgba(167, 139, 250, 0.4);
+    text-shadow: 0 0 10px rgba(167, 139, 250, 0.7);
+    top: -5%;
+    left: -8%;
+    animation: float-star-slow-1 8s infinite alternate ease-in-out;
+}
+
+.star-2 {
+    font-size: 2.8rem;
+    color: rgba(192, 202, 245, 0.45);
+    text-shadow: 0 0 12px rgba(192, 202, 245, 0.8);
+    top: 15%;
+    right: -10%;
+    animation: float-star-slow-2 10s infinite alternate ease-in-out;
+}
+
+.star-3 {
+    font-size: 1.8rem;
+    color: rgba(139, 92, 246, 0.35);
+    text-shadow: 0 0 8px rgba(139, 92, 246, 0.6);
+    bottom: 25%;
+    left: -12%;
+    animation: float-star-slow-3 12s infinite alternate ease-in-out;
+}
+
+.star-4 {
+    font-size: 2.4rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-shadow: 0 0 10px rgba(192, 202, 245, 0.6);
+    bottom: -6%;
+    right: -6%;
+    animation: float-star-slow-1 9s infinite alternate ease-in-out;
+}
+
+.star-5 {
+    font-size: 1.5rem;
+    color: rgba(167, 139, 250, 0.35);
+    text-shadow: 0 0 6px rgba(167, 139, 250, 0.5);
+    top: 45%;
+    left: -10%;
+    animation: float-star-slow-2 11s infinite alternate ease-in-out;
+}
+
+.star-6 {
+    font-size: 2rem;
+    color: rgba(192, 202, 245, 0.4);
+    text-shadow: 0 0 10px rgba(192, 202, 245, 0.6);
+    top: 60%;
+    right: -8%;
+    animation: float-star-slow-3 7s infinite alternate ease-in-out;
+}
+
+@keyframes float-star-slow-1 {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translate(12px, -15px) rotate(45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.6;
+    }
+}
+
+@keyframes float-star-slow-2 {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translate(-15px, 12px) rotate(-35deg);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0.8;
+    }
+}
+
+@keyframes float-star-slow-3 {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translate(10px, 15px) scale(1.15);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.5;
+    }
+}
+
+/* h1 com a fonte Transcity */
+h1 {
+    font-family: 'Transcity', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 20%, #c0caf5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+}
+
+/* Parágrafo de instrução sob o título */
+.container>p {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 36ch;
+    margin: 0.75rem auto 1.25rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Labels e texto secundário em Helvetica */
+label {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: Helvetica, Arial, sans-serif;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: rgba(192, 202, 245, 0.6);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow:
+        0 0 0 4px rgba(139, 92, 246, 0.15),
+        0 0 20px rgba(139, 92, 246, 0.1);
+}
+
+button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    border: 1px solid rgba(192, 202, 245, 0.3);
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: Helvetica, Arial, sans-serif;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.45);
+    background: linear-gradient(135deg, #9667ff 0%, #8b5cf6 100%);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+/* Card de resultado */
+.result-card {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--card-border);
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* "Resultado para NOME" em Helvetica */
+.result-card h2 {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.result-card .name-highlight {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.number-container {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+/* Número do resultado com a fonte Transcity */
+.number-badge {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192, 202, 245, 0.12) 0%, rgba(192, 202, 245, 0.02) 100%);
+    border: 2px solid rgba(192, 202, 245, 0.6);
+    color: #e8edff;
+    font-family: 'Transcity', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    box-shadow: 0 0 25px var(--number-glow);
+    animation: pulse-glow 2.5s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px var(--number-glow), inset 0 0 10px rgba(192, 202, 245, 0.1);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(192, 202, 245, 0.5), inset 0 0 15px rgba(192, 202, 245, 0.2);
+    }
+}
+
+/* Significado em Helvetica */
+.meaning {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #e5e7eb;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 1.25rem;
+    border-radius: 12px;
+    border: 1px solid rgba(192, 202, 245, 0.25);
+    border-left: 4px solid rgba(192, 202, 245, 0.6);
+    text-align: left;
+}
+
+/* ==============================
+   RESPONSIVO — Mobile First
+   ============================== */
+
+/* Telas até 768px (tablet/mobile grande) */
+@media (max-width: 768px) {
+    body {
+        padding: 1.5rem 1rem;
+    }
+
+    .container {
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+    }
+
+    h1 {
+        font-size: clamp(1.65rem, 6.5vw, 2.3rem);
+        margin-bottom: 1.5rem;
+    }
+
+    .number-badge {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+
+    /* Desativa o hover no mobile pra evitar layout shift em touch */
+    .container:hover {
+        transform: none;
+        box-shadow:
+            0 20px 40px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08),
+            0 0 60px rgba(139, 92, 246, 0.12);
+    }
+
+    button:hover {
+        transform: none;
+    }
+}
+
+/* Telas até 480px (celular pequeno) */
+@media (max-width: 480px) {
+    body {
+        padding: 1rem 0.75rem;
+    }
+
+    .container {
+        padding: 1.75rem 1.25rem;
+        border-radius: 16px;
+        max-width: 100%;
+    }
+
+    h1 {
+        font-size: clamp(1.4rem, 7.5vw, 1.95rem);
+        letter-spacing: 0;
+        margin-bottom: 1.25rem;
+    }
+
+    form {
+        gap: 1rem;
+    }
+
+    input[type="text"] {
+        padding: 0.85rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    button {
+        padding: 0.9rem;
+        font-size: 0.95rem;
+    }
+
+    .number-badge {
+        width: 72px;
+        height: 72px;
+        font-size: 1.75rem;
+    }
+
+    .meaning {
+        padding: 1rem;
+        font-size: 0.9rem;
+    }
+
+    /* Auras menores no celular pra aliviar renderização */
+    body::before {
+        width: 250px;
+        height: 250px;
+        filter: blur(90px);
+    }
+
+    body::after {
+        width: 220px;
+        height: 220px;
+        filter: blur(90px);
+    }
+
+    .aura-extra {
+        width: 180px;
+        height: 180px;
+        filter: blur(80px);
+    }
+}
+
+/* Telas até 360px (celulares bem pequenos) */
+@media (max-width: 360px) {
+    .container {
+        padding: 1.5rem 1rem;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    .number-badge {
+        width: 65px;
+        height: 65px;
+        font-size: 1.5rem;
+    }
+}
