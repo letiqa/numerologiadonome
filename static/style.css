@@ -3,11 +3,12 @@
 
 @font-face {
     font-family: 'Transcity';
-    src: url('Transcity DEMO.otf') format('opentype');
-    font-weight: normal;
+    src: url('Transcity-DEMO.otf') format('opentype');
+    font-weight: 100 900;
     font-style: normal;
     font-display: swap;
 }
+
 
 :root {
     --bg-base: #0a0612;
