@@ -1,6 +1,10 @@
 
-from flask import Flask,render_template,request
+from flask import Flask, render_template, request
 import unicodedata
+import mimetypes
+
+mimetypes.add_type('font/otf', '.otf')
+
 app = Flask(__name__) 
 
 TABELA_PITAGORICA = {

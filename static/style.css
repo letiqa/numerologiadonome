@@ -3,8 +3,27 @@
 
 @font-face {
     font-family: 'Transcity';
-    src: url('Transcity-DEMO.otf') format('opentype');
-    font-weight: 100 900;
+    src: url('Transcity-DEMO.otf') format('opentype'),
+         url('/static/Transcity-DEMO.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Transcity';
+    src: url('Transcity-DEMO.otf') format('opentype'),
+         url('/static/Transcity-DEMO.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Transcity';
+    src: url('Transcity-DEMO.otf') format('opentype'),
+         url('/static/Transcity-DEMO.otf') format('opentype');
+    font-weight: bold;
     font-style: normal;
     font-display: swap;
 }
